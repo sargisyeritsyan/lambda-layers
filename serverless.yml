@@ -15,14 +15,14 @@ provider:
   stage: dev
   region: us-east-1
   profile: lambda-layers-dev
-#  environment:
-#    NODE_PATH: "./:/opt"
+  environment:
+    NODE_PATH: "./:/opt"
 
 
-#layers:
-#  NodeModulesLayer:
-#    path: node_modules
-#    description: "Moment Dependencies"
+layers:
+  NodeModulesLayer:
+    path: node_modules
+    description: "Moment Dependencies"
 
 
 functions:
@@ -32,6 +32,6 @@ functions:
       - http:
           method: get
           path: hello
-#    layers:
-#      - {Ref: NodeModulesLayerLambdaLayer}
+    layers:
+      - {Ref: NodeModulesLayerLambdaLayer}
 #      - arn:aws:lambda:us-east-1:111321215538:layer:MomentLayer:5
