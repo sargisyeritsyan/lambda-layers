@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [dev]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        destination: [dev]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Initializing AWS
+        run: |
+          mkdir -p ~/.aws
+          touch ~/.aws/credentials
+          [ -z ${SERVICE_NAME} ] && export SERVICE_NAME=${DEFAULT_SERVICE_NAME}
+          echo "[${SERVICE_NAME}-${{ matrix.destination }}]" >> ~/.aws/credentials
+          echo "aws_access_key_id=${AWS_ACCESS_KEY_ID}" >> ~/.aws/credentials
+          echo -n "aws_secret_access_key=${AWS_SECRET_ACCESS_KEY}" >> ~/.aws/credentials
+        env:
+          DEFAULT_SERVICE_NAME: ${{ secrets.DEFAULT_SERVICE_NAME }}
+          SERVICE_NAME: ${{ secrets.SERVICE_NAME_DEV }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
+
+      - name: Deploy to ${{ matrix.destination }}
+        run: echo "Will deploy to ${{ matrix.destination }}"
+
+      - name: NPM Install
+        run: npm ci
+
+      - name: Deploy Server
+        run: |
+          npx serverless deploy -s ${{ matrix.destination }} --aws-s3-accelerate
+        env:
+          SECRETS_PASSWORD: ${{ secrets.SECRETS_PASSWORD_DEV }}

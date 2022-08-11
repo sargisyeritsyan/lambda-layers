@@ -1,0 +1,37 @@
+service: lambda-layers
+frameworkVersion: "3"
+
+package:
+  exclude:
+#    - moment_layer/**
+#    - moment_layer_cron/**
+#    - node_modules/**
+
+provider:
+  name: aws
+  apiGateway:
+    shouldStartNameWithService: true
+  runtime: nodejs16.x
+  stage: dev
+  region: us-east-1
+  profile: lambda-layers-dev
+#  environment:
+#    NODE_PATH: "./:/opt"
+
+
+#layers:
+#  NodeModulesLayer:
+#    path: node_modules
+#    description: "Moment Dependencies"
+
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          method: get
+          path: hello
+#    layers:
+#      - {Ref: NodeModulesLayerLambdaLayer}
+#      - arn:aws:lambda:us-east-1:111321215538:layer:MomentLayer:5
