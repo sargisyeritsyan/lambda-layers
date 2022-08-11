@@ -29,9 +29,9 @@ jobs:
           echo -n "aws_secret_access_key=${AWS_SECRET_ACCESS_KEY}" >> ~/.aws/credentials
         env:
           DEFAULT_SERVICE_NAME: ${{ secrets.DEFAULT_SERVICE_NAME }}
-          SERVICE_NAME: ${{ secrets.SERVICE_NAME_DEV }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
+          SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Deploy to ${{ matrix.destination }}
         run: echo "Will deploy to ${{ matrix.destination }}"
