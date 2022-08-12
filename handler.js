@@ -1,4 +1,5 @@
 const moment = require("moment");
+const { v4  } =require("uuid");
 const dateNow = moment().format("MMM Do YY");
 
 module.exports.hello = async event => {
@@ -6,7 +7,8 @@ module.exports.hello = async event => {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: dateNow
+        message: dateNow,
+        uuid: v4()
       }),
   };
 };

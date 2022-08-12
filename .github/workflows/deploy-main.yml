@@ -41,6 +41,6 @@ jobs:
 
       - name: Deploy Server
         run: |
-          npx serverless deploy -s ${{ matrix.destination }}
+          npx serverless deploy
         env:
           SECRETS_PASSWORD: ${{ secrets.SECRETS_PASSWORD_DEV }}
