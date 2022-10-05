@@ -5,7 +5,7 @@ package:
   exclude:
 #    - moment_layer/**
 #    - moment_layer_cron/**
-    - node_modules/**
+#    - node_modules/**
 
 provider:
   name: aws
