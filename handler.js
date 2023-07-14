@@ -6,10 +6,10 @@ const dateNow = moment().format("MMM Do YY");
 let count = 0;
 
 module.exports.hello = async event => {
-    // console.log("START")
-    // await pause(3000);
-    // console.log("END")
-    // count ++
+    console.log("START")
+    await pause(5000);
+    console.log("END")
+    count ++
 
     return {
         statusCode: 200,
