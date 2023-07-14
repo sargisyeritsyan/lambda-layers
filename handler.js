@@ -1,22 +1,22 @@
 const moment = require("moment");
-const {v4} = require("uuid");
+// const {v4} = require("uuid");
 const axios = require("axios");
 const dateNow = moment().format("MMM Do YY");
 
 let count = 0;
 
 module.exports.hello = async event => {
-    console.log("START")
-    await pause(2 * 60 * 1000);
-    console.log("END")
-    count ++
+    // console.log("START")
+    // await pause(3000);
+    // console.log("END")
+    // count ++
 
     return {
         statusCode: 200,
         body: JSON.stringify(
             {
                 message: dateNow,
-                uuid: v4(),
+                // uuid: v4(),
                 count
             }),
     };
