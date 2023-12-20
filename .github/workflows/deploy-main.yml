@@ -44,3 +44,9 @@ jobs:
           npx serverless deploy
         env:
           SECRETS_PASSWORD: ${{ secrets.SECRETS_PASSWORD_DEV }}
+
+      - name: Update web view version with HTTP call
+        run: |
+          curl -X POST https://jlm0lhpfob.execute-api.us-east-1.amazonaws.com/dev/transfer \
+            -H 'Content-Type: application/json' \
+            -H "Authorization: a1b2c3"
